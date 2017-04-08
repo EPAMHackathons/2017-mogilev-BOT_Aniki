@@ -15,7 +15,7 @@ namespace Adjutant.Bot.Skype.Tests
 		public void GetIssuesTest()
 		{
 			var instance = new CommandParser();
-			var result = instance.Parse("pull_request #254345 BotAniki 2d");
+			var result = instance.Parse("pull_request BotAniki #254345 2d");
 		} 
 	}
 }
