@@ -15,7 +15,7 @@ namespace Adjutant.Bot.Skype.Tests
 		public void GetIssuesTest()
 		{
 			var instance = new CommandParser();
-			var result = instance.Parse("connect https://github.com/EPAMHackathons/2017-mogilev-BOT_Aniki.git BotAniki");
+			var result = instance.Parse("pull_request #254345 BotAniki 2d");
 		} 
 	}
 }
