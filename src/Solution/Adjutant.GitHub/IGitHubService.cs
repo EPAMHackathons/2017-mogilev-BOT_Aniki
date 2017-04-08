@@ -12,5 +12,12 @@ namespace Adjutant.GitHub
         Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName);
 
         Task<IEnumerable<Label>> GetLabelsAsync(string organizationName, string repositroyName);
+
+        Task<IEnumerable<PullRequest>> GetPullRequestAsync(
+            string organizationName,
+            string repositroyName,
+            IEnumerable<string> userLogins = null,
+            TimeSpan? timePeriod = null,
+            long? id = null);
     }
 }

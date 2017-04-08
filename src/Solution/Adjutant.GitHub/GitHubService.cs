@@ -16,15 +16,13 @@ namespace Adjutant.GitHub
     {
         private const string apiUrl = "https://api.github.com/repos";
 
-        private const string token = "3abaff4e9069423d1bf678c79478e2b890e14d7a";
-
         private GitHubClient client;
 
         public GitHubService()
         {
             client = new GitHubClient(new Octokit.ProductHeaderValue("Adjutant"), new Uri(apiUrl));
 
-            client.Credentials = new Credentials(token);
+            client.Credentials = new Credentials("Darya_Tselesh@epam.com", "q1w2e3r4t5");
         }
 
         public async Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName)
@@ -45,7 +43,32 @@ namespace Adjutant.GitHub
             return labels;
         }
 
+        public async Task<IEnumerable<PullRequest>> GetPullRequestAsync(
+            string organizationName,
+            string repositroyName,
+            IEnumerable<string> userLogins = null,
+            TimeSpan? timePeriod = null, 
+            long? id = null)
+        {
+            IEnumerable<PullRequest> pullRequests = await client.PullRequest.GetAllForRepository(organizationName, repositroyName);
 
+            if (pullRequests != null && id != null)
+            {
+                pullRequests = pullRequests.Where(pullRequest => pullRequest.Id == id);
+            }
+
+            if (pullRequests != null && userLogins != null && userLogins.Any())
+            {
+                pullRequests = pullRequests.Where(pullRequest => userLogins.Contains(pullRequest.User.Login));
+            }
+
+            if (pullRequests != null && timePeriod != null)
+            {
+                pullRequests = pullRequests.Where(pullRequest => pullRequest.CreatedAt.DateTime >= (DateTime.UtcNow - timePeriod));
+            }
+
+            return pullRequests;
+        }
     }
 
 
