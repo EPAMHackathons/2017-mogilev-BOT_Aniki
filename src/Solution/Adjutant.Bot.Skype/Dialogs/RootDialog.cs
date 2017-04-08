@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Adjutant.Bot.Skype.Domain;
 
 namespace Adjutant.Bot.Skype.Dialogs
 {
@@ -19,11 +20,11 @@ namespace Adjutant.Bot.Skype.Dialogs
         {
             var activity = await result as Activity;
 
-            // calculate something for us to return
-            int length = (activity.Text ?? string.Empty).Length;
+            var parser = new CommandParser();
+            var model = parser.Parse(activity.Text);
 
             // return our reply to the user
-            await context.PostAsync($"You sent {activity.Text} which was {length} characters");
+            await context.PostAsync($"You sent {activity.Text} which was characters");
 
             context.Wait(MessageReceivedAsync);
         }
