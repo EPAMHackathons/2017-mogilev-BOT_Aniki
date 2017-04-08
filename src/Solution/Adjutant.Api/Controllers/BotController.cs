@@ -1,22 +1,61 @@
-﻿using Adjutant.Common.Models;
+﻿using Adjutant.Api.Models;
 using Swashbuckle.Swagger.Annotations;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Adjutant.Api.Controllers
 {
     public class BotController : ApiController
     {
-        [SwaggerOperation("Create")]
-        [SwaggerResponse(HttpStatusCode.Created)]
+        [SwaggerOperation("ConnectRepository")]
+        [SwaggerResponse(HttpStatusCode.OK)]
         [HttpPost]
-        public void ConnectRepository([FromBody]ConnectRepositoryModel model)
+        [Route("github/connect")]
+        public Task<HttpResponseMessage> SetConnectRepository([FromBody]ConnectRequestModel model)
         {
+            throw new NotImplementedException();
 
+            var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.OK
+            };
+
+            return Task.FromResult(response);
+        }
+
+        [SwaggerOperation("GetStatus")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [HttpPost]
+        [Route("github/status")]
+        public Task<HttpResponseMessage> GetStatus([FromBody]StatusRequestModel model)
+        {
+            throw new NotImplementedException();
+
+            var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.OK
+            };
+
+            return Task.FromResult(response);
+        }
+
+        [SwaggerOperation("GetPullRequests")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [HttpPost]
+        [Route("github/pullrequest")]
+        public Task<HttpResponseMessage> GetPullRequests([FromBody]PullRequestModel model)
+        {
+            throw new NotImplementedException();
+
+            var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.OK
+            };
+
+            return Task.FromResult(response);
         }
     }
 }
