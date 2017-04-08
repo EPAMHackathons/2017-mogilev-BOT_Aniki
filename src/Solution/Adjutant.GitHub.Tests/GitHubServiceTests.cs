@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using Octokit;
+using System.Collections.Generic;
 
 namespace Adjutant.GitHub.Tests
 {
@@ -15,11 +17,14 @@ namespace Adjutant.GitHub.Tests
         {
             gitHubService = new GitHubService();
         }
-        
+
         [Test]
-        public void GetIssuesTest()
+        public async System.Threading.Tasks.Task GetIssuesTestAsync()
         {
-            gitHubService.GetIssues("Azure", "azure-powershell");
+            IEnumerable<Issue> issues = await gitHubService.GetIssuesAsync("Azure", "azure-powershell");
+            Assert.IsNotNull(issues);
         }
     }
+
+
 }

@@ -5,6 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Octokit;
 
 namespace Adjutant.GitHub
 {
@@ -12,16 +16,20 @@ namespace Adjutant.GitHub
     {
         private const string apiUrl = "https://api.github.com/repos";
 
-        public string GetIssues(string organizationName, string repositroyName)
-        {
-            string getIssuesUrl = string.Format("{0}/{1}/{2}", apiUrl, organizationName, repositroyName);
-            var request = WebRequest.Create(getIssuesUrl);
-            var response = request.GetResponse();
-            var stream = new StreamReader(response.GetResponseStream());
+        private GitHubClient client;
 
-            return stream.ReadToEnd();
+        public GitHubService()
+        {
+            client = new GitHubClient(new Octokit.ProductHeaderValue("Adjutant"), new Uri(apiUrl));
         }
 
-        
+        public async Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName)
+        {
+            return await client.Issue.GetAllForRepository(organizationName, repositroyName);
+        }
+
+
     }
+
+
 }

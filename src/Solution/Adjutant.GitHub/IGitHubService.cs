@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Octokit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Adjutant.GitHub
 {
     public interface IGitHubService
     {
-        string GetIssues(string organizationName, string repositoryName);
+        Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName);
     }
 }
