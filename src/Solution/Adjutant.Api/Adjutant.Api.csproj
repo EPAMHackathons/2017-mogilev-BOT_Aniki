@@ -135,16 +135,19 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BotController.cs" />
-    <Compile Include="Models\PullRequestModel.cs" />
-    <Compile Include="Models\StatusRequestModel.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Models\Request\PullRequestModel.cs" />
+    <Compile Include="Models\Request\StatusRequestModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseRequestModel.cs" />
-    <Compile Include="Models\ConnectRequestModel.cs" />
+    <Compile Include="Models\Request\BaseRequestModel.cs" />
+    <Compile Include="Models\Request\ConnectRequestModel.cs" />
+    <Compile Include="Models\Response\PullRequestResponseModel.cs" />
+    <Compile Include="Models\Response\StatusResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolver\UnityResolver.cs" />
+    <Compile Include="Services\BotService.cs" />
+    <Compile Include="Services\Interfaces\IBotService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -167,9 +170,9 @@
       <Project>{413B4FF2-5AF0-4C83-A112-E5420693EF4E}</Project>
       <Name>Adjutant.Api.Repositories</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Adjutant.Common\Adjutant.Common.csproj">
-      <Project>{0096951d-47d6-4def-9804-4f05edc0213c}</Project>
-      <Name>Adjutant.Common</Name>
+    <ProjectReference Include="..\Adjutant.GitHub\Adjutant.GitHub.csproj">
+      <Project>{98268652-7e23-4bea-ba71-6e5eab6d63d7}</Project>
+      <Name>Adjutant.GitHub</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

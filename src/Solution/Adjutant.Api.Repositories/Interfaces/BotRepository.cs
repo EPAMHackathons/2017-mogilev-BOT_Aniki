@@ -1,5 +1,4 @@
 ﻿using Adjutant.Api.Repositories.Interfaces;
-using Adjutant.Common.Models;
 using System;
 
 namespace Adjutant.Api.Repositories

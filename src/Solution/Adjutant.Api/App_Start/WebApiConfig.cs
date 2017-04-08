@@ -1,8 +1,8 @@
 ﻿using Adjutant.Api.Repositories;
 using Adjutant.Api.Repositories.Interfaces;
 using Adjutant.Api.Resolver;
-using Adjutant.Common.Services;
-using Adjutant.Common.Services.Interfaces;
+using Adjutant.Api.Services;
+using Adjutant.Api.Services.Interfaces;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 

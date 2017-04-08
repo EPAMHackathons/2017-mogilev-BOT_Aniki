@@ -1,4 +1,4 @@
-﻿namespace Adjutant.Common.Models
+﻿namespace Adjutant.Api.Repositories
 {
     public class ConnectRepositoryModel
     {

@@ -40,15 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectRepositoryModel.cs" />
     <Compile Include="Interfaces\BotRepository.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Adjutant.Common\Adjutant.Common.csproj">
-      <Project>{0096951D-47D6-4DEF-9804-4F05EDC0213C}</Project>
-      <Name>Adjutant.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

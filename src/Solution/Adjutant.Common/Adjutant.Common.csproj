@@ -40,10 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ConnectRepositoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BotService.cs" />
-    <Compile Include="Services\Interfaces\IBotService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adjutant.GitHub\Adjutant.GitHub.csproj">
+      <Project>{98268652-7E23-4BEA-BA71-6E5EAB6D63D7}</Project>
+      <Name>Adjutant.GitHub</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Api", "Adjutant.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Api.Tests", "Adjutant.Api.Tests\Adjutant.Api.Tests.csproj", "{7E3914D8-CBEA-4264-B563-3966C6B672AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Common", "Adjutant.Common\Adjutant.Common.csproj", "{0096951D-47D6-4DEF-9804-4F05EDC0213C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Api.Repositories", "Adjutant.Api.Repositories\Adjutant.Api.Repositories.csproj", "{413B4FF2-5AF0-4C83-A112-E5420693EF4E}"
 EndProject
 Global
@@ -49,10 +47,6 @@ Global
 		{7E3914D8-CBEA-4264-B563-3966C6B672AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E3914D8-CBEA-4264-B563-3966C6B672AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E3914D8-CBEA-4264-B563-3966C6B672AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0096951D-47D6-4DEF-9804-4F05EDC0213C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0096951D-47D6-4DEF-9804-4F05EDC0213C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0096951D-47D6-4DEF-9804-4F05EDC0213C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0096951D-47D6-4DEF-9804-4F05EDC0213C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{413B4FF2-5AF0-4C83-A112-E5420693EF4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{413B4FF2-5AF0-4C83-A112-E5420693EF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{413B4FF2-5AF0-4C83-A112-E5420693EF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU

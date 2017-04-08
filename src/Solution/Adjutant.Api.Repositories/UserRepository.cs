@@ -1,6 +1,4 @@
-﻿using Adjutant.Common.Models;
-
-namespace Adjutant.Api.Repositories.Interfaces
+﻿namespace Adjutant.Api.Repositories.Interfaces
 {
     public interface IBotRepository
     {
