@@ -23,6 +23,8 @@ namespace Adjutant.Bot.Skype.Dialogs
             StringBuilder answer = new StringBuilder();
 
             var activity = await result as Activity;
+            Activity message = null;
+            var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
             var parser = new CommandParser();
             var model = parser.Parse(activity.Text);
@@ -36,30 +38,21 @@ namespace Adjutant.Bot.Skype.Dialogs
                 case Models.ActionEnum.PullRequest:
                     break;
                 default:
-                    //SendDefaultAnswer();
+                    message = SendDefaultAnswer(activity);
                     break;
             }
 
-            
-
-            //var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-            //var replyMessage = incomingMessage.CreateReply("Yo, I heard you.", "en");
-            //await connector.Conversations.ReplyToActivityAsync(replyMessage);
-
-            //// return our reply to the user
-            //await context.PostAsync($"You sent {activity.Text} which was characters");
-
-            //context.Wait(MessageReceivedAsync);
+            await connector.Conversations.ReplyToActivityAsync(message);
         }
 
-        private async void SendDefaultAnswer(Activity activity)
+        private Activity SendDefaultAnswer(Activity activity)
         {
-            var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
             var message = activity.CreateReply("");
             message.Type = "message";
             message.Attachments = new List<Attachment>();
             message.Attachments.Add(new Attachment { ContentType = "image/png", ContentUrl = @"http://s.quickmeme.com/img/a8/a8022006b463b5ed9be5a62f1bdbac43b4f3dbd5c6b3bb44707fe5f5e26635b0.jpg" });
-            await connector.Conversations.ReplyToActivityAsync(message);
+
+            return message;
         }
     }
 }
