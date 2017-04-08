@@ -8,129 +8,129 @@ using System.Security.Policy;
 
 namespace Adjutant.Bot.Skype.Domain
 {
-	public class CommandParser
-	{
-		//commad
-		public string command;
-		public string command_connect = "connect";
-		string gitDom = ".git";
+    public class CommandParser
+    {
+        //commad
+        public string command;
+        public string command_connect = "connect";
+        string gitDom = ".git";
 
-		public BaseEntity Parse(string commandsLine)
-		{
-			string pattern = " ";
-			String[] commandArgs = Regex.Split(commandsLine, pattern);
-			command = commandArgs[0];
+        public BaseEntity Parse(string commandsLine)
+        {
+            string pattern = " ";
+            String[] commandArgs = Regex.Split(commandsLine, pattern);
+            command = commandArgs[0];
 
-			switch (command.ToLower())
-			{
-				case "connect":
-					return CreateCommandModel(commandArgs);
-				case "status":
-					return CreateStatusModel(commandArgs);
+            switch (command.ToLower())
+            {
+                case "connect":
+                    return CreateCommandModel(commandArgs);
+                case "status":
+                    return CreateStatusModel(commandArgs);
 
-				case "pull_request":
+                case "pull_request":
 
-					break;
-			}
+                    break;
+            }
 
-			return default(BaseEntity);
-		}
+            return default(BaseEntity);
+        }
 
-		public BaseEntity CreateCommandModel(string[] commandArgs)
-		{
-			var result = new ConnectRequetsModel();
-			Url repository = null;
-			string owner = null;
-			string alias = null;
-			string repositoryName = null;
+        public BaseEntity CreateCommandModel(string[] commandArgs)
+        {
+            var result = new ConnectRequetsModel();
+            Url repository = null;
+            string owner = null;
+            string alias = null;
+            string repositoryName = null;
 
-			bool noName = false;
-			string tempAlise = "";
-			if (commandArgs.Length < 3)
-				noName = !noName;
+            bool noName = false;
+            string tempAlise = "";
+            if (commandArgs.Length < 3)
+                noName = !noName;
 
-			foreach (string arg in commandArgs)
-			{
-				if (arg.Contains("http://") || arg.Contains("https://"))
-				{
-					repository = new Url(arg);
-					String[] elementsUrl = Regex.Split(arg, "/");
-					owner = elementsUrl[3];
-					tempAlise = elementsUrl[4];
-                    repositoryName = elementsUrl[4].Replace(gitHost, "");
+            foreach (string arg in commandArgs)
+            {
+                if (arg.Contains("http://") || arg.Contains("https://"))
+                {
+                    repository = new Url(arg);
+                    String[] elementsUrl = Regex.Split(arg, "/");
+                    owner = elementsUrl[3];
+                    tempAlise = elementsUrl[4];
+                    //repositoryName = elementsUrl[4].Replace(gitHost, "");
                 }
                 else
-				{
-					if (!arg.Contains(command_connect))
-						alias = arg;
-				}
-			}
+                {
+                    if (!arg.Contains(command_connect))
+                        alias = arg;
+                }
+            }
 
-			if (noName)
-				alias = tempAlise;
+            if (noName)
+                alias = tempAlise;
 
-			result.Alias = alias;
-			result.Owner = owner;
-			result.RepositoryUrl = repository;
-			result.RepositoryName = repositoryName;
+            result.Alias = alias;
+            result.Owner = owner;
+            result.RepositoryUrl = repository;
+            result.RepositoryName = repositoryName;
 
-			return result;
-		}
+            return result;
+        }
 
-		public BaseEntity CreateStatusModel(string[] commandArgs)
-		{
-			var result = new ConnectRequetsModel();
-			string alias = null;
-			string owner = null;
-			string repositoryName = null;
-			Url repositoryUrl = null;
-			int timePeriod = 0;
-			List<string> users = new List<string>();
+        public BaseEntity CreateStatusModel(string[] commandArgs)
+        {
+            var result = new ConnectRequetsModel();
+            string alias = null;
+            string owner = null;
+            string repositoryName = null;
+            Url repositoryUrl = null;
+            int timePeriod = 0;
+            List<string> users = new List<string>();
 
-			string hourIndex = "h";
-			string dayIndex = "d";
+            string hourIndex = "h";
+            string dayIndex = "d";
 
-			alias = commandArgs[1];
+            alias = commandArgs[1];
 
-			if (alias.Contains("http://")|| alias.Contains("https://"))
-			{
-				repositoryUrl = new Url(alias);
-				String[] elementsUrl = Regex.Split(alias, "/");
-				owner = elementsUrl[3];
-				repositoryName = elementsUrl[4].Replace(gitDom, "");
-				alias = repositoryName;
-			}
+            if (alias.Contains("http://") || alias.Contains("https://"))
+            {
+                repositoryUrl = new Url(alias);
+                String[] elementsUrl = Regex.Split(alias, "/");
+                owner = elementsUrl[3];
+                repositoryName = elementsUrl[4].Replace(gitDom, "");
+                alias = repositoryName;
+            }
 
-			foreach (string arg in commandArgs)
-			{
-				if (arg.Contains("@"))
-					users.Add(arg);
+            foreach (string arg in commandArgs)
+            {
+                if (arg.Contains("@"))
+                    users.Add(arg);
 
-				//ограничение по времени 99ч или 99дней
-				if (arg.Length < 4)
-				{
-					if (arg.Contains(hourIndex))
-					{
-						string str_val_time = arg.Replace(hourIndex, "");
-						timePeriod = Int32.Parse(str_val_time);
-					}
+                //ограничение по времени 99ч или 99дней
+                if (arg.Length < 4)
+                {
+                    if (arg.Contains(hourIndex))
+                    {
+                        string str_val_time = arg.Replace(hourIndex, "");
+                        timePeriod = Int32.Parse(str_val_time);
+                    }
 
-					if (arg.Contains(dayIndex))
-					{
-						string str_val_time = arg.Replace(dayIndex, "");
-						timePeriod = Int32.Parse(str_val_time) * 24;
-					}
-				}
-			}
+                    if (arg.Contains(dayIndex))
+                    {
+                        string str_val_time = arg.Replace(dayIndex, "");
+                        timePeriod = Int32.Parse(str_val_time) * 24;
+                    }
+                }
+            }
 
-			result.Alias = alias;
-			result.Owner = owner;
-			result.RepositoryUrl = repositoryUrl;
-			result.RepositoryName = repositoryName;
-			result.TimePeriod = timePeriod;
-			result.Users = users;
+            result.Alias = alias;
+            result.Owner = owner;
+            result.RepositoryUrl = repositoryUrl;
+            result.RepositoryName = repositoryName;
+            result.TimePeriod = timePeriod;
+            result.Users = users;
 
-			return result;
-		}
-}
+            return result;
+        }
+    }
 }
