@@ -10,5 +10,7 @@ namespace Adjutant.GitHub
     public interface IGitHubService
     {
         Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName);
+
+        Task<IEnumerable<Label>> GetLabelsAsync(string organizationName, string repositroyName);
     }
 }
