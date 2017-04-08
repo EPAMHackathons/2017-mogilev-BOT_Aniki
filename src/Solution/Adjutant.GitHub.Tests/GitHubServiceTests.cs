@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+using Octokit;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Adjutant.GitHub.Tests
 {
@@ -8,6 +11,10 @@ namespace Adjutant.GitHub.Tests
     [TestFixture]
     public class GitHubServiceTests
     {
+        private const string CompanyName = "Azure";
+
+        private const string ReposirotyName = "azure-powershell";
+
         private GitHubService gitHubService;
 
         [SetUp]
@@ -15,11 +22,21 @@ namespace Adjutant.GitHub.Tests
         {
             gitHubService = new GitHubService();
         }
-        
+
         [Test]
-        public void GetIssuesTest()
+        public async Task GetIssuesTestAsync()
         {
-            gitHubService.GetIssues("Azure", "azure-powershell");
+            IEnumerable<Issue> issues = await gitHubService.GetIssuesAsync(CompanyName, ReposirotyName);
+            Assert.IsNotNull(issues);
+        }
+
+        [Test]
+        public async Task GetLabelsTestAsync()
+        {
+            IEnumerable<Label> labels = await gitHubService.GetLabelsAsync(CompanyName, ReposirotyName);
+            Assert.IsNotNull(labels);
         }
     }
+
+
 }
