@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -135,13 +138,13 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BotController.cs" />
-    <Compile Include="Models\Request\PullRequestModel.cs" />
-    <Compile Include="Models\Request\StatusRequestModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Request\BaseRequestModel.cs" />
     <Compile Include="Models\Request\ConnectRequestModel.cs" />
+    <Compile Include="Models\Request\PullRequestModel.cs" />
+    <Compile Include="Models\Request\StatusRequestModel.cs" />
     <Compile Include="Models\Response\PullRequestResponseModel.cs" />
     <Compile Include="Models\Response\StatusResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,6 +172,10 @@
     <ProjectReference Include="..\Adjutant.Api.Repositories\Adjutant.Api.Repositories.csproj">
       <Project>{413B4FF2-5AF0-4C83-A112-E5420693EF4E}</Project>
       <Name>Adjutant.Api.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adjutant.Common\Adjutant.Common.csproj">
+      <Project>{0096951d-47d6-4def-9804-4f05edc0213c}</Project>
+      <Name>Adjutant.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Adjutant.GitHub\Adjutant.GitHub.csproj">
       <Project>{98268652-7e23-4bea-ba71-6e5eab6d63d7}</Project>

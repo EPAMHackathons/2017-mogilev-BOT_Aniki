@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Adjutant.Bot.Skype.Models
+﻿namespace Adjutant.Bot.Skype.Models
 {
-	public class ConnectRequetsModel : BaseEntity
-	{
-		public long ClientId { get; set; }
+    public class ConnectRequetsModel : BaseEntity
+    {
+        public long ClientId { get; set; }
 
-		public string RepositoryUrl { get; set; }
+        public string RepositoryUrl { get; set; }
 
-		public string Alias { get; set; }
+        public string Alias { get; set; }
 
-		public string Owner { get; set; }
+        public string Owner { get; set; }
 
-		public string RepositoryName { get; set; }
-	}
+        public string RepositoryName { get; set; }
+    }
 }
