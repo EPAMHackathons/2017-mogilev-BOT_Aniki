@@ -103,8 +103,16 @@ namespace Adjutant.Bot.Skype.Domain
             {
                 if (arg.Contains("@"))
                     users.Add(arg);
+
                 //ограничение по времени 99часов или 99дней
-                timePeriod = GetTimeInString(arg);
+                string pattern_time = "\\d*d";
+                string pattern_date = "\\d*d";
+
+                Regex regex_time = new Regex(pattern_time);
+                Regex regex_date = new Regex(pattern_date);
+                if (regex_time.IsMatch(arg) || regex_date.IsMatch(arg))
+                    timePeriod = GetTimeInString(arg);
+
             }
 
             result.Action = ActionEnum.Status;
@@ -129,14 +137,19 @@ namespace Adjutant.Bot.Skype.Domain
 
             foreach (string arg in commandArgs)
             {
-                timePeriod = GetTimeInString(arg);
+                string pattern_time = "\\d*d";
+                string pattern_date = "\\d*d";
+
+                Regex regex_time = new Regex(pattern_time);
+                Regex regex_date = new Regex(pattern_date);
+                if (regex_time.IsMatch(arg) || regex_date.IsMatch(arg))
+                    timePeriod = GetTimeInString(arg);
 
                 string patternId = "#\\d*";
 
                 Regex regex = new Regex(patternId);
-
                 if (regex.IsMatch(arg))
-                        idPrid = Int32.Parse(arg.Replace("#",""));
+                    idPrid = Int32.Parse(arg.Replace("#",""));
             }
 
             result.Action = ActionEnum.PullRequest;
