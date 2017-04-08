@@ -8,10 +8,10 @@ namespace Adjutant.Api.Repositories.Tests
     public class MongoDbRepositoryTests
     {
         [Test]
-        public void DatabaseTest()
+        public void SaveRepositoryConnectionTest()
         {
             var instance = new BotRepository();
-            long clientId = 12345;
+            long clientId = 123456;
             var model = new ConnectRepositoryModel();
             model.Alias = "alias";
             model.ClientId = clientId;
@@ -20,6 +20,15 @@ namespace Adjutant.Api.Repositories.Tests
             model.RepositoryUrl = "https://github.com/EPAMHackathons/2017-mogilev-BOT_Aniki";
 
             instance.SaveRepositoryConnection(model);
+        }
+
+        [Test]
+        public void GetRepositoryOwnerTest()
+        {
+            var instance = new BotRepository();
+            string clientId = "123456";
+
+            var owner = instance.GetRepositoryOwner(clientId, "alias");
         }
     }
 }
