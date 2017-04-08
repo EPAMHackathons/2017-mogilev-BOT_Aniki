@@ -18,5 +18,7 @@ namespace Adjutant.Bot.Skype.Models
 		public int TimePeriod { get; set; }
 
 		public IList<string> Users { get; set; }
-	}
+
+        public int iDUserPrid { get; set; }
+    }
 }
