@@ -12,9 +12,12 @@ namespace Adjutant.Api.Services
     {
         private GitHubService gitHubService = null;
 
+        private BotRepository repository = null;
+
         public BotService()
         {
             gitHubService = new GitHubService();
+            repository = new BotRepository();
         }
         public void ConnectRepository(string skypeClientId, ConnectRepositoryModel model)
         {
@@ -24,18 +27,21 @@ namespace Adjutant.Api.Services
         public async Task<PullRequestResponseModel> GetPullRequestsAsync(PullRequestModel pullRequestModel)
         {
             var pullRequestResponseModel = new PullRequestResponseModel();
-            //TODO: get organization and repostiory name
-            pullRequestResponseModel.PullRequests = await gitHubService.GetPullRequestAsync("", "", pullRequestModel.Users, pullRequestModel.StartFrom, pullRequestModel.PullRequestId);
+            var repositoryOwner = repository.GetRepositoryOwner(pullRequestModel.ClientId.ToString(), pullRequestModel.Alias);
 
+            pullRequestResponseModel.PullRequests = await gitHubService.GetPullRequestAsync(repositoryOwner.Key, repositoryOwner.Value, pullRequestModel.Users, pullRequestModel.StartFrom, pullRequestModel.PullRequestId);
+            
             return pullRequestResponseModel;
         }
 
         public async Task<StatusResponseModel> GetStatus(StatusRequestModel statusRequestModel)
         {
             var statusResponseModel = new StatusResponseModel();
-            //TODO: get organization and repostiory name
-            statusResponseModel.PullRequests = await gitHubService.GetPullRequestAsync("", "", statusRequestModel.Users, statusRequestModel.StartFrom);
-            statusResponseModel.Issues = await gitHubService.GetIssuesAsync("", "", statusRequestModel.Users, statusRequestModel.StartFrom);
+            var ownerRepository = repository.GetRepositoryOwner(statusRequestModel.ClientId.ToString(), statusRequestModel.Alias);
+
+            statusResponseModel.PullRequests = await gitHubService.GetPullRequestAsync(ownerRepository.Key, ownerRepository.Value, statusRequestModel.Users, statusRequestModel.StartFrom);
+            statusResponseModel.Issues = await gitHubService.GetIssuesAsync(ownerRepository.Key, ownerRepository.Value, statusRequestModel.Users, statusRequestModel.StartFrom);
+
             return statusResponseModel;
         }
     }

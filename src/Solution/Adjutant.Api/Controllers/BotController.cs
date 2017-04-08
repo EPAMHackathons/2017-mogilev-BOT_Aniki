@@ -1,23 +1,30 @@
 ﻿using Adjutant.Api.Models;
+using Adjutant.Api.Services;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Adjutant.Api.Repositories;
 
 namespace Adjutant.Api.Controllers
 {
     public class BotController : ApiController
     {
+        private BotService botService;
+
+        public BotController()
+        {
+            botService = new BotService();
+        }
+
         [SwaggerOperation("ConnectRepository")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [HttpPost]
         [Route("github/connect")]
         public Task<HttpResponseMessage> SetConnectRepository([FromBody]ConnectRequestModel model)
         {
-            throw new NotImplementedException();
-
             var response = new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.OK
@@ -30,32 +37,46 @@ namespace Adjutant.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [HttpPost]
         [Route("github/status")]
-        public Task<HttpResponseMessage> GetStatus([FromBody]StatusRequestModel model)
+        public async Task<HttpResponseMessage> GetStatusAsync([FromBody]StatusRequestModel model)
         {
-            throw new NotImplementedException();
+            var response = new HttpResponseMessage();
+            StatusResponseModel status = null;
 
-            var response = new HttpResponseMessage()
+            try
             {
-                StatusCode = HttpStatusCode.OK
-            };
+                status = await botService.GetStatus(model);
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+            }
 
-            return Task.FromResult(response);
+            response.StatusCode = HttpStatusCode.OK;
+
+            return response;
         }
 
         [SwaggerOperation("GetPullRequests")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [HttpPost]
         [Route("github/pullrequest")]
-        public Task<HttpResponseMessage> GetPullRequests([FromBody]PullRequestModel model)
+        public async Task<HttpResponseMessage> GetPullRequests([FromBody]PullRequestModel model)
         {
-            throw new NotImplementedException();
+            var response = new HttpResponseMessage();
+            PullRequestResponseModel pullRequest = null;
 
-            var response = new HttpResponseMessage()
+            try
             {
-                StatusCode = HttpStatusCode.OK
-            };
+                pullRequest = await botService.GetPullRequestsAsync(model);
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+            }
 
-            return Task.FromResult(response);
+            response.StatusCode = HttpStatusCode.OK;
+
+            return response;
         }
     }
 }

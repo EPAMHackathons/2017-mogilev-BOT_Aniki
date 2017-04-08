@@ -24,7 +24,7 @@ namespace Adjutant.Api.Repositories
             _database = _client.GetDatabase("Adjutant");
         }
 
-        public string GetRepositoryOwner(string clientId, string alias)
+        public KeyValuePair<string, string> GetRepositoryOwner(string clientId, string alias)
         {
             var collection = _database.GetCollection<UserEntity>("users");
             var filter = Builders<UserEntity>.Filter.Eq("ClientId", clientId);
@@ -42,7 +42,7 @@ namespace Adjutant.Api.Repositories
                 throw new Exception("Repository not found.");
             }
 
-            return repository.Owner;
+            return new KeyValuePair<string, string>(repository.Owner, repository.RepositoryName);
         }
 
         public void SaveRepositoryConnection(ConnectRepositoryModel model)
