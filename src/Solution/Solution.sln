@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Git", "Adjutant.Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.GitHub.Tests", "Adjutant.GitHub.Tests\Adjutant.GitHub.Tests.csproj", "{9358856C-D078-4908-8B6E-3E6E3482E70D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Bot.Skype.Tests", "Adjutant.Bot.Skype.Tests\Adjutant.Bot.Skype.Tests.csproj", "{4750D854-A956-4CCE-B230-AB31FEBFEB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjutant.Bot.Skype", "Adjutant.Bot.Skype\Adjutant.Bot.Skype.csproj", "{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{9358856C-D078-4908-8B6E-3E6E3482E70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9358856C-D078-4908-8B6E-3E6E3482E70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9358856C-D078-4908-8B6E-3E6E3482E70D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4750D854-A956-4CCE-B230-AB31FEBFEB81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4750D854-A956-4CCE-B230-AB31FEBFEB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4750D854-A956-4CCE-B230-AB31FEBFEB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4750D854-A956-4CCE-B230-AB31FEBFEB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
