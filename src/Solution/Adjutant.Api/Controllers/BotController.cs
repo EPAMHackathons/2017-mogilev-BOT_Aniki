@@ -13,7 +13,8 @@ namespace Adjutant.Api.Controllers
     {
         [SwaggerOperation("Create")]
         [SwaggerResponse(HttpStatusCode.Created)]
-        public void Post([FromBody]ConnectPostRequestModel model)
+        [HttpPost]
+        public void ConnectRepository([FromBody]ConnectRepositoryModel model)
         {
 
         }

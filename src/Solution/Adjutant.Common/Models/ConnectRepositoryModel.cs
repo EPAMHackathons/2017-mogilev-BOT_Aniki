@@ -1,6 +1,6 @@
 ﻿namespace Adjutant.Common.Models
 {
-    public class ConnectPostRequestModel
+    public class ConnectRepositoryModel
     {
         public string Owner { get; set; }
 

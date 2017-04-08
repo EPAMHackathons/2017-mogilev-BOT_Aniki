@@ -159,6 +159,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adjutant.Api.Repositories\Adjutant.Api.Repositories.csproj">
+      <Project>{413B4FF2-5AF0-4C83-A112-E5420693EF4E}</Project>
+      <Name>Adjutant.Api.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Adjutant.Common\Adjutant.Common.csproj">
       <Project>{0096951d-47d6-4def-9804-4f05edc0213c}</Project>
       <Name>Adjutant.Common</Name>
