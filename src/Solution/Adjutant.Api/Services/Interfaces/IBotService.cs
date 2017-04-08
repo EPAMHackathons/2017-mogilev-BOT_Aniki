@@ -1,6 +1,7 @@
 ﻿using Adjutant.Api.Models;
 using Adjutant.Api.Repositories;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Adjutant.Api.Services.Interfaces
 {
@@ -8,8 +9,8 @@ namespace Adjutant.Api.Services.Interfaces
     {
         void ConnectRepository(string skypeClientId, ConnectRepositoryModel model);
 
-        IEnumerable<PullRequestResponseModel> GetPullRequests(PullRequestModel pullRequestModel);
+        Task<PullRequestResponseModel> GetPullRequestsAsync(PullRequestModel pullRequestModel);
 
-        IEnumerable<StatusResponseModel> GetStatus();
+        Task<StatusResponseModel> GetStatus(StatusRequestModel statusRequestModel);
     }
 }

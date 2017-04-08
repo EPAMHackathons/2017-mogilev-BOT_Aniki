@@ -9,7 +9,11 @@ namespace Adjutant.GitHub
 {
     public interface IGitHubService
     {
-        Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName);
+        Task<IEnumerable<Issue>> GetIssuesAsync(
+            string organizationName,
+            string repositroyName,
+            IEnumerable<string> userLogins = null,
+            DateTime? startFrom = null);
 
         Task<IEnumerable<Label>> GetLabelsAsync(string organizationName, string repositroyName);
 
@@ -17,7 +21,7 @@ namespace Adjutant.GitHub
             string organizationName,
             string repositroyName,
             IEnumerable<string> userLogins = null,
-            TimeSpan? timePeriod = null,
+            DateTime? startFrom = null,
             long? id = null);
     }
 }

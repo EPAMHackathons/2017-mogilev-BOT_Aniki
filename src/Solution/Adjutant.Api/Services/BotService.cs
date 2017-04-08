@@ -4,6 +4,7 @@ using Adjutant.Api.Models;
 using Adjutant.Api.Services.Interfaces;
 using Adjutant.Api.Repositories;
 using Adjutant.GitHub;
+using System.Threading.Tasks;
 
 namespace Adjutant.Api.Services
 {
@@ -20,14 +21,22 @@ namespace Adjutant.Api.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PullRequestResponseModel> GetPullRequests(PullRequestModel pullRequestModel)
+        public async Task<PullRequestResponseModel> GetPullRequestsAsync(PullRequestModel pullRequestModel)
         {
-            throw new NotImplementedException();
+            var pullRequestResponseModel = new PullRequestResponseModel();
+            //TODO: get organization and repostiory name
+            pullRequestResponseModel.PullRequests = await gitHubService.GetPullRequestAsync("", "", pullRequestModel.Users, pullRequestModel.StartFrom, pullRequestModel.PullRequestId);
+
+            return pullRequestResponseModel;
         }
 
-        public IEnumerable<StatusResponseModel> GetStatus()
+        public async Task<StatusResponseModel> GetStatus(StatusRequestModel statusRequestModel)
         {
-            throw new NotImplementedException();
+            var statusResponseModel = new StatusResponseModel();
+            //TODO: get organization and repostiory name
+            statusResponseModel.PullRequests = await gitHubService.GetPullRequestAsync("", "", statusRequestModel.Users, statusRequestModel.StartFrom);
+            statusResponseModel.Issues = await gitHubService.GetIssuesAsync("", "", statusRequestModel.Users, statusRequestModel.StartFrom);
+            return statusResponseModel;
         }
     }
 }

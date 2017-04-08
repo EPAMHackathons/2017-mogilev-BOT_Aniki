@@ -42,7 +42,7 @@ namespace Adjutant.GitHub.Tests
         [Test]
         public async Task GetPullRequestsByTimePeriodTestAsync()
         {
-            IEnumerable<PullRequest> pullRequests = await gitHubService.GetPullRequestAsync(CompanyName, ReposirotyName, timePeriod: new TimeSpan(5, 0, 0, 0));
+            IEnumerable<PullRequest> pullRequests = await gitHubService.GetPullRequestAsync(CompanyName, ReposirotyName, startFrom: DateTime.UtcNow - new TimeSpan(5, 0, 0, 0));
             Assert.AreEqual(pullRequests.Count(), 4);
         }
 
@@ -73,8 +73,20 @@ namespace Adjutant.GitHub.Tests
             userLogins.Add("viananth");
             userLogins.Add("v-Ajnava");
 
-            IEnumerable<PullRequest> pullRequests = await gitHubService.GetPullRequestAsync(CompanyName, ReposirotyName, userLogins, new TimeSpan(5, 0, 0, 0), 114896918);
+            IEnumerable<PullRequest> pullRequests = await gitHubService.GetPullRequestAsync(CompanyName, ReposirotyName, userLogins, DateTime.UtcNow - new TimeSpan(5, 0, 0, 0), 114896918);
             Assert.AreEqual(pullRequests.Count(), 1);
+        }
+
+        [Test]
+        public async Task GetIssuesByUsersAsync()
+        {
+            var userLogins = new List<string>();
+
+            userLogins.Add("viananth");
+            userLogins.Add("v-Ajnava");
+
+            IEnumerable<Issue> issues = await gitHubService.GetIssuesAsync(CompanyName, ReposirotyName, userLogins, DateTime.UtcNow - new TimeSpan(5, 0, 0, 0));
+            Assert.AreEqual(issues.Count(), 3);
         }
     }
 
