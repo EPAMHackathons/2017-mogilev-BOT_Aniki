@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Adjutant.Api.Repositories;
+using Newtonsoft.Json;
 
 namespace Adjutant.Api.Controllers
 {
@@ -25,10 +26,26 @@ namespace Adjutant.Api.Controllers
         [Route("github/connect")]
         public Task<HttpResponseMessage> SetConnectRepository([FromBody]ConnectRequestModel model)
         {
-            var response = new HttpResponseMessage()
+            var response = new HttpResponseMessage();
+            var connectRepositoryModel = new ConnectRepositoryModel()
             {
-                StatusCode = HttpStatusCode.OK
+                Alias = model.Alias,
+                ClientId = model.ClientId,
+                Owner = model.Owner,
+                RepositoryName = model.RepositoryName,
+                RepositoryUrl = model.RepositoryUrl
             };
+
+            try
+            {
+                botService.ConnectRepository(model.ClientId.ToString(), connectRepositoryModel);
+            }
+            catch
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+            }
+
+            response.StatusCode = HttpStatusCode.OK;
 
             return Task.FromResult(response);
         }
@@ -52,6 +69,7 @@ namespace Adjutant.Api.Controllers
             }
 
             response.StatusCode = HttpStatusCode.OK;
+            response.Content = new StringContent(JsonConvert.SerializeObject(status));
 
             return response;
         }
@@ -75,6 +93,7 @@ namespace Adjutant.Api.Controllers
             }
 
             response.StatusCode = HttpStatusCode.OK;
+            response.Content = new StringContent(JsonConvert.SerializeObject(pullRequest));
 
             return response;
         }
