@@ -57,7 +57,7 @@ namespace Adjutant.Bot.Skype.Domain
 					String[] elementsUrl = Regex.Split(arg, "/");
 					owner = elementsUrl[3];
 					tempAlise = elementsUrl[4];
-                    repositoryName = elementsUrl[4].Replace(gitDom, "");
+                    repositoryName = elementsUrl[4].Replace(gitHost, "");
                 }
                 else
 				{
@@ -132,5 +132,5 @@ namespace Adjutant.Bot.Skype.Domain
 
 			return result;
 		}
-    }
+}
 }
