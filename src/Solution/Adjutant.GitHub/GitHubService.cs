@@ -25,9 +25,25 @@ namespace Adjutant.GitHub
             client.Credentials = new Credentials("Darya_Tselesh@epam.com", "q1w2e3r4t5");
         }
 
-        public async Task<IEnumerable<Issue>> GetIssuesAsync(string organizationName, string repositroyName)
+        public async Task<IEnumerable<Issue>> GetIssuesAsync(
+            string organizationName, 
+            string repositroyName,
+            IEnumerable<string> userLogins = null,
+            DateTime? startFrom = null)
         {
-            return await client.Issue.GetAllForRepository(organizationName, repositroyName);
+            IEnumerable<Issue> issues = await client.Issue.GetAllForRepository(organizationName, repositroyName);
+            
+            if (issues != null && userLogins != null && userLogins.Any())
+            {
+                issues = issues.Where(issue => userLogins.Contains(issue.User.Login));
+            }
+
+            if (issues != null && startFrom != null)
+            {
+                issues = issues.Where(issue => issue.CreatedAt.DateTime >= startFrom);
+            }
+
+            return issues;
         }
 
         public async Task<IEnumerable<Label>> GetLabelsAsync(string organizationName, string repositroyName)
@@ -47,7 +63,7 @@ namespace Adjutant.GitHub
             string organizationName,
             string repositroyName,
             IEnumerable<string> userLogins = null,
-            TimeSpan? timePeriod = null, 
+            DateTime? startFrom = null, 
             long? id = null)
         {
             IEnumerable<PullRequest> pullRequests = await client.PullRequest.GetAllForRepository(organizationName, repositroyName);
@@ -62,9 +78,9 @@ namespace Adjutant.GitHub
                 pullRequests = pullRequests.Where(pullRequest => userLogins.Contains(pullRequest.User.Login));
             }
 
-            if (pullRequests != null && timePeriod != null)
+            if (pullRequests != null && startFrom != null)
             {
-                pullRequests = pullRequests.Where(pullRequest => pullRequest.CreatedAt.DateTime >= (DateTime.UtcNow - timePeriod));
+                pullRequests = pullRequests.Where(pullRequest => pullRequest.CreatedAt.DateTime >= startFrom);
             }
 
             return pullRequests;
